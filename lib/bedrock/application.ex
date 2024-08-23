@@ -7,9 +7,12 @@ defmodule Bedrock.Application do
 
   @impl true
   def start(_type, _args) do
+    Oban.Telemetry.attach_default_logger(encode: false)
+
     children = [
       BedrockWeb.Telemetry,
       Bedrock.Repo,
+      {Oban, Application.fetch_env!(:bedrock, Oban)},
       {DNSCluster, query: Application.get_env(:bedrock, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Bedrock.PubSub},
       # Start the Finch HTTP client for sending emails
