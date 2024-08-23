@@ -41,5 +41,7 @@ npm-debug.log
 /priv/cert/
 
 .elixir_ls/
+*.code-*
+.vscode
 
 obsidian/
