@@ -19,8 +19,12 @@ defmodule Bedrock.MixProject do
   def application do
     [
       mod: {Bedrock.Application, []},
-      extra_applications: [:logger, :runtime_tools, :os_mon]
+      extra_applications: [:logger, :runtime_tools, :os_mon] ++ dev_extras()
     ]
+  end
+
+  defp dev_extras do
+    if Mix.env() == :dev, do: [:wx, :observer], else: []
   end
 
   # Specifies which paths to compile per environment.
